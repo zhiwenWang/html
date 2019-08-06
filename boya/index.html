@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/*  * 表示所有元素 这里去除所有的内外边距，效率不高，如果页面的标签太多，效率越低
+		所以页面不允许出现这个选择器 ，这里为了练习不关注*/
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		body{
+			/* 定义字体  color  font-开头  text-开头 line-开头 都可以被继承  这里设置字体，整篇文档默认的字体*/
+			/* 注意超链接不继承 因为超链接有一个伪类的权重 */
+			font-family: "Microsoft YaHei","Simsun";
+			/* 这里加高没有实质作用，就是为了我们开发的时候可以让页面滚起来，方便我们开发*/
+			height: 8888px;
+		}
+		.header{
+			/*这里没有宽度，因为是通栏*/
+			/*在标准流里，div是一个块级元素，没有width相当于撑满父亲*/
+			height: 58px;
+			background-color: #191D3A;
+		}
+		/* 空格后代选择器 */
+		.header .inner_c{
+			width: 1000px;
+			height: 58px;
+			/*
+			关于margin:我们要知道：
+			1.margin的塌陷现象 标准文档流中，竖直方向的margin不叠加，以较大的为准。
+			   但是如果不在标准流，比如盒子都浮动了，那么两个盒子之间是没有塌陷现象的就是两个margin相加
+			2.margin的值可以为auto，表示自动。当left、right两个方向，都是auto的时候，盒子居中了;
+			   只有标准流的盒子，才能使用margin:0 auto; 居中
+			   使用margin:0 auto; 的盒子，必须有width，有明确的width
+			3.margin这个属性，本质上描述的是兄弟和兄弟之间的距离；   
+			        最好不要用这个marign表达父子之间的距离
+			所以，我们一定要善于使用父亲的padding，而不是儿子的margin
+
+			使用margin 必须有宽度，高度的话用父亲的padding而不是儿子的margin
+			*/
+			margin: 0 auto;
+			
+		}
+		.header .inner_c h1{
+			/*一旦一个元素浮动了，那么，将能够并排了，并且能够设置宽高了。无论它原来是个div还是个span*/
+			/* 浮动八大字：脱标  贴边 字围  收缩*/
+			/*这里不用写宽，因为浮动有收缩特性 一个浮动的元素，如果没有设置width，那么将自动收缩为文字的宽度*/
+			float: left;
+			/* border: 1px solid red; */
+			margin-right: 40px;
+		}
+		.header .inner_c .nav{
+			float: left;
+			width: 607px;
+			height: 58px;
+			
+		}
+		.header .inner_c .nav ul{
+			/*去掉展示的小圆圈*/
+			list-style: none;
+		}
+		.header .inner_c .nav ul li{
+			/*浮动元素不继承  inner_c nav  jrwm 三个是浮动，但是对于nav来说，ul中的li还是标准文档流*/
+			float: left;
+			width: 100px; /*可以不设置宽度可以自动收缩 但是我们自己设计排版，这里设置宽度*/
+			height: 58px;
+			border-left: 1px solid 252947;
+			/*文本：左右居中 text-align 上线居中：line-height*/
+			text-align: center;
+			line-height: 58px;
+
+		}
+		/*点是交集选择器*/
+		.header .inner_c .nav ul li.last{
+			border-right:1px solid 252947;
+		}
+		.header .inner_c .nav ul li a{
+			/*行级元素转块级元素，因为转后可以设置宽高，这样鼠标点击超链接的区域就会变大，用户体验性好*/
+			display: block;
+			width: 100px;
+			height: 58px;
+			/*去掉超链接默认的下划线*/
+			text-decoration: none;
+			font-size: 14px;
+			color: white;
+		}
+		/* a标签的伪类  love :link 没有点击  o hover 鼠标悬停  v visited 点击后  e active 鼠标按下
+           我们一般只写hover
+		*/
+		.header .inner_c .nav ul li a.hover{
+			background-color: #252947;
+		}
+
+		.header .inner_c .jrwm{
+			float: left;
+			width: 100px;
+			height: 34px;
+			margin-left:48px;
+			background-color: #38B774;
+			/*
+			定位position有三种，分别是相对定位relative、绝对定位absolute、固定定位fixed
+			相对定位：就是微调元素位置的。让元素相对自己原来的位置，进行位置调整。
+			          不脱标，老家留坑，形影分离
+			绝对定位：绝对定位比相对定位更灵活  绝对定位脱标
+			*/
+		 	position: relative; 
+			top:12px;
+			left:12px;
+			text-decoration: none;
+			text-align: center;
+			line-height: 34px;
+			color: white;
+			font-size: 12px;
+			/*圆角*/
+			border-radius: 4px;
+		}
+		.header .inner_c .jrwm:hover{
+			background-color: orange;
+		}
+		/*清除浮动
+		清除浮动的方法：
+		1.给盒子增加高度height 有高度的盒子才能关住浮动
+		2.内部隔墙法：网页制作过程中很少有高度，因为内容会撑高 含内容的div增加属性 clear：both  清除别人对我的影响
+			弊端：margin失效
+		3.外部隔墙法
+		4.overflow:hidden; 正常来说是溢出的内容隐藏 
+		   偏方：一个父亲不能被浮动的儿子撑出高度，这是加上overflow:hidden;后，父亲就可以被儿子撑出高度
+		*/
+		.cl{
+			clear: both;
+		}
+
+		.banner{
+			/*没有设置宽度，因为会被撑满*/
+			height: 463px;
+			
+			/*
+			background-color: ;
+			background-image: ;
+			background-repeat: ;
+			background-position: 右偏移量 下偏移量 ;
+			background-attachment: ;背景是否固定 背景就会被固定住，不会被滚动条滚走。
+			综合属性：background;
+			*/
+			background: url(images/banner.jpg) no-repeat center top;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<div class="inner_c">
+			<!--这里h3是为了给image增加语义，如果不写可以但是语义不明确-->
+			<h1><img src="images/logo.png"/></h1>
+			<div class="nav">
+				<ul>
+					<li><a href="#">网页栏目</a></li>
+					<li><a href="#">网页栏目</a></li>
+					<li><a href="#">网页栏目</a></li>
+					<li><a href="#">网页栏目</a></li>
+					<li><a href="#">网页栏目</a></li>
+					<li class="last"><a href="#">网页栏目</a></li>
+				</ul>
+			</div>
+			<a href="#" class="jrwm">加入我们</a>
+		</div>
+	</div>
+	<div class="cl"></div>
+	<div class="banner"></div>
+</body>
+</html>
