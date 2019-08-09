@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		h1{
+			color: red;
+			background-color:yellow;
+			font-size: 40px;
+			font-style: italic;
+			font-weight: normal;
+			text-decoration: underline;
+		}
+
+		p{
+			font-size: 40px;	
+		}
+		#para1{
+			color:red;
+		}
+
+		.lv{
+			color:green;
+		}
+		.da{
+			font-size: 60px;
+		}
+		.xian{
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body>
+	<h1>我是一个主标题</h1>
+
+	<p>我是一个段落</p>
+	<p id="para1">我是一个段落</p>
+	<p>我是一个段落</p>
+	<div>
+		<p class="lv da">水果</p>
+		<p id="hezi" class="lv xian">水果</p>
+		<p class="da xian">水果</p>
+	</div>
+</body>
+<script type="text/javascript">
+	var hezi = document.getElementById("hezi");
+	var i = 0;
+	setInterval(function(){
+		i+=10;
+		hezi.style.marginLeft = i+"px";
+	},60);
+
+
+</script>
+</html>
